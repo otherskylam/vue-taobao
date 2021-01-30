@@ -78,6 +78,20 @@ caption, th {
   text-align: left;
 }
 
-//q:before, q:after, blockquote:before, blockquote:after {
-//  content:””;
-//}
+q:before, q:after, blockquote:before, blockquote:after {
+  content:'';
+}
+
+
+.icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+
+//TODO 由于headSearch问题，暂时设置这样，以后考虑是否修改
+body {
+  overflow: hidden;
+}
