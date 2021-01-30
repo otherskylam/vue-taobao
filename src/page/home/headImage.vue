@@ -6,7 +6,7 @@
         <li v-for="item in imgItems" :key="item.id"
             :style="{opacity: item.opacity, zIndex: item.zIndex, transitionDuration: item.transitionDuration, transform: 'translate(' + item.translate.x + ','  + item.translate.y + ')'}">
           <a>
-            <img :src="require('../../image/' + item.name + '.jpg')">
+            <img :src="require('../../image/' + item.name + '.jpg')" @click="goDetail">
           </a>
         </li>
       </ul>
@@ -15,6 +15,7 @@
       <span v-for="circle in imgItems" :key="circle.id"
             :style="{background: circle.circleInfo.color, opacity: circle.circleInfo.opacity}"></span>
     </div>
+    <div class="imgBg"></div>
   </div>
 </template>
 
@@ -293,6 +294,11 @@ export default {
         Math.abs(disX) > this.winWidth / 8 ? this.scrollToLeft() : this.cancelScrollToLeft();
       }
       this.setScroll();
+    },
+
+    goDetail: function (e) {
+      // TODO 点击事件
+      console.log(e);
     }
   },
   mounted() {
@@ -336,8 +342,18 @@ export default {
     @include wh(8px);
     border-radius: 100%;
     display: inline-block;
-    margin: 5px 2px;
+    margin: 10px 2px;
     //transition-duration: 300ms;
   }
+}
+
+.imgBg {
+  @include wh(100%, 10px);
+  position: absolute;
+  bottom: 0;
+  z-index: 101;
+  @include bg("../../image/headImgBg.png");
+  background-position: center center;
+  background-size: 100%;
 }
 </style>
