@@ -15,6 +15,7 @@
       <span v-for="circle in imgItems" :key="circle.id"
             :style="{background: circle.circleInfo.color, opacity: circle.circleInfo.opacity}"></span>
     </div>
+<!--    TODO 在PC上测试时候（iPhoneX分辨率下），最下面不可以完全遮挡图片，暂时不知道什么问题，手机上查看暂时没问题-->
     <div class="imgBg"></div>
   </div>
 </template>
