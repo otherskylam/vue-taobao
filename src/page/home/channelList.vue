@@ -53,17 +53,12 @@ export default {
     }
   },
 
-  created() {
-    console.log(document.getElementsByClassName('channelListContainer'));
-  },
-
   methods: {
     updateScrollBar: function (e) {
       let
           scrollBarInfo = this.scrollBarInfo,
           channelListContainer = e.target;
       if (scrollBarInfo.scale === null) {
-        console.log('update scale');
         scrollBarInfo.scale = (channelListContainer.scrollWidth - channelListContainer.offsetWidth) / (parseInt(scrollBarInfo.bgWidth) - parseInt(scrollBarInfo.width));
       }
       scrollBarInfo.translateX = channelListContainer.scrollLeft / scrollBarInfo.scale + 'px';

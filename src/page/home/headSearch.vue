@@ -2,7 +2,7 @@
 <!--  <header>-->
     <div class="home_header">
       <!--      <input class="searchBox" type="text" placeholder="寻找宝贝店铺">-->
-      <a class="searchBox">
+      <a class="searchBox" @click="goSearch">
         <svg class="icon icon_search" aria-hidden="true">
           <use xlink:href="#icon-sousuo"></use>
         </svg>
@@ -14,9 +14,15 @@
 
 <script>
 import '../../plugins/iconfont'
+import router from "@/router";
 
 export default {
-  name: "headSearch"
+  name: "headSearch",
+  methods: {
+    goSearch: function () {
+      router.push('search');
+    }
+  }
 }
 </script>
 
