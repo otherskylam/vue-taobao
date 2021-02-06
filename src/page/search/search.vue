@@ -109,7 +109,7 @@ export default {
 
       .searchTab {
         width: 56px;
-        height: 30px;
+        height: 32px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -201,6 +201,7 @@ export default {
         padding: 0 60px 0 5px;
         border: none;
         background: none;
+        font-size: 14px;
 
         &:focus {
           outline: none;
