@@ -10,6 +10,10 @@
 
 <style lang="scss">
 @import './style/common';
+body {
+  background-color: #f4f4f4;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

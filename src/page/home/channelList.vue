@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mainContainer">
     <div class="channelListContainer" @scroll="updateScrollBar">
       <!--    TODO 由于for循环，无论下面的v-if是否生效，都会生产节点，所有会有很多空的div节点-->
       <div class="channelList" v-for="(item, index) in channelList" :key="index">
@@ -69,6 +69,9 @@ export default {
 
 <style lang="scss" scoped>
 @import "../../style/mixin";
+.mainContainer {
+  background: #fff;
+}
 
 .channelListContainer {
   display: flex;
