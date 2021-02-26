@@ -11,7 +11,8 @@
 <style lang="scss">
 @import './style/common';
 body {
-  background-color: #f4f4f4;
+  //background-color: #f4f4f4;
+  background-color: #B3B3B3;
 }
 
 #app {
@@ -32,6 +33,6 @@ body {
 }
 
 #nav a.router-link-exact-active {
-  color: #42b983;
+  color: #b3b3b3;
 }
 </style>
