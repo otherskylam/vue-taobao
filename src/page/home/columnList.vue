@@ -38,7 +38,7 @@
           <div class="containerBTitle leftThirdTitle"></div>
           <div class="containerBLeft leftThirdLeft">
             <div class="containerBLeftBox leftThirdLeftBox">
-              <span>挖深藏的店</span>
+              <span><span>挖深藏的店</span></span>
               <div></div>
             </div>
           </div>
@@ -47,12 +47,15 @@
           </div>
         </div>
       </div>
+      <!--      TODO 标题是图片，有对不齐的情况，考虑是布局问题-->
       <div class="columnListRight">
         <div class="containerB" v-for="(item, index) in containerB" :key="index">
-          <div class="containerBTitle" :style="{backgroundImage: 'url(' + require('../../image/' + item.title.imgName) + ')'}"></div>
+          <div class="containerBTitle"
+               :style="{backgroundImage: 'url(' + require('../../image/' + item.title.imgName) + ')'}"></div>
           <div class="containerBLeft">
             <div class="containerBLeftBox">
-              <span :style="{color: item.secTitle.color}">{{ item.secTitle.data }}</span>
+              <!--              flex布局下，text-overflow: ellipsis无效，所以暂时先嵌套多一个span-->
+              <span><span :style="{color: item.secTitle.color}">{{ item.secTitle.data }}</span></span>
               <div :style="{backgroundImage: 'url(' + require('../../image/' + item.leftImg.name) + ')'}"></div>
             </div>
           </div>
@@ -340,20 +343,39 @@ export default {
       .containerBLeftBox {
         @include wh(81%, 100%);
         margin-left: 2%;
+        display: flex;
+        position: relative;
+        flex-direction: column;
+        justify-content: flex-end;
 
         > span {
-          @include wh(100%, 30%);
+          //@include wh(100%, 30%);
           display: flex;
-          align-items: center;
-          color: #f9a500;
-          font: {
-            size: 0.8125rem;
-            //weight: bold;
-          };
+          position: absolute;
+          top: 0;
+          left: 0;
+          //align-items: center;
+          //color: #f9a500;
+          //font: {
+          //  size: 0.8125rem;
+          //  //weight: bold;
+          //};
           margin-left: 0.25rem;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
+          //overflow: hidden;
+          //text-overflow: ellipsis;
+          //white-space: nowrap;
+          > span {
+            align-items: center;
+            color: #f9a500;
+            font: {
+              size: 0.8125rem;
+              //weight: bold;
+            };
+            //margin-left: 0.25rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
         }
 
         > div {
@@ -372,6 +394,7 @@ export default {
 
       > div {
         @include wh(81%, 100%);
+        margin: 0 auto;
         background: {
           repeat: no-repeat;
           size: contain;
