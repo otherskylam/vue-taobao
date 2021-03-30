@@ -1,15 +1,26 @@
 <template>
   <div id="app">
-<!--    <div id="nav">-->
-<!--      <router-link to="/">Home</router-link> |-->
-<!--      <router-link to="/about">About</router-link>-->
-<!--    </div>-->
+    <!--    <div id="nav">-->
+    <!--      <router-link to="/">Home</router-link> |-->
+    <!--      <router-link to="/about">About</router-link>-->
+    <!--    </div>-->
     <router-view/>
   </div>
 </template>
 
+<script>
+export default {
+  mounted() {
+      window.onresize = function () {
+          location.reload();
+      };
+  }
+}
+</script>
+
 <style lang="scss">
 @import './style/common';
+
 body {
   background-color: #f4f4f4;
   //background-color: #B3B3B3;
