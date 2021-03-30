@@ -48,7 +48,10 @@ export default {
     size: 27px 20px;
     position: 9px center;
   };
-  //padding: 6px 9px 6px 42px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
 }
 
 .searchBox {

@@ -11,8 +11,8 @@
 <style lang="scss">
 @import './style/common';
 body {
-  //background-color: #f4f4f4;
-  background-color: #B3B3B3;
+  background-color: #f4f4f4;
+  //background-color: #B3B3B3;
 }
 
 #app {

@@ -314,6 +314,7 @@ export default {
 
 .headImage {
   width: 100%;
+  margin-top: 37px;
   position: relative;
 
   ul {
