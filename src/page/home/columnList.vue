@@ -64,38 +64,18 @@
           </div>
         </div>
       </div>
-      <!--      <div class="columnListRight">-->
-      <!--        <div class="containerB">-->
-      <!--          <div class="containerBTitle"></div>-->
-      <!--          <div class="containerBLeft">-->
-      <!--            <span>好物传送门</span>-->
-      <!--            <div></div>-->
-      <!--          </div>-->
-      <!--          <div class="containerBRight">-->
-      <!--            <div></div>-->
-      <!--          </div>-->
-      <!--        </div>-->
-      <!--        <div class="containerB">-->
-      <!--          <div class="containerBTitle"></div>-->
-      <!--          <div class="containerBLeft">-->
-      <!--            <span>好物传送门</span>-->
-      <!--            <div></div>-->
-      <!--          </div>-->
-      <!--          <div class="containerBRight">-->
-      <!--            <div></div>-->
-      <!--          </div>-->
-      <!--        </div>-->
-      <!--        <div class="containerB">-->
-      <!--          <div class="containerBTitle"></div>-->
-      <!--          <div class="containerBLeft">-->
-      <!--            <span>好物传送门</span>-->
-      <!--            <div></div>-->
-      <!--          </div>-->
-      <!--          <div class="containerBRight">-->
-      <!--            <div></div>-->
-      <!--          </div>-->
-      <!--        </div>-->
-      <!--      </div>-->
+    </div>
+    <div class="touTiao" :style="{height: touTiaoHeight()}">
+      <div class="touTiaoLogo">
+        <div></div>
+      </div>
+      <div class="touTiaoList" id="touTiaoList"
+           :style="{transform: 'translateY(' + touTiaoListInfo.translateY + 'px)', transitionDuration: touTiaoListInfo.duration}">
+        <a class="touTiaoItem" v-for="(item, index) in touTiaoList" :key="index">
+          <div class="touTiaoItemTag">{{ item.tag }}</div>
+          <div class="touTiaoItemTitle">{{ item.title }}</div>
+        </a>
+      </div>
     </div>
   </div>
 </template>
@@ -126,14 +106,76 @@ export default {
           rightImg: {name: 'columnList_fsdakimg2.jpg'}
         }
       ],
+      touTiaoList: [
+        {tag: '摄影', title: '1分钟 |轻松解决8个手机摄影技巧'},
+        {tag: '萌宠', title: '为什么唤猫的名字，它总不搭理？'},
+        {tag: '摄影', title: '专治镜头尴尬症，7个女生通用pose'},
+        {tag: '评测', title: '实测：五款最强防霾滤芯安利给你'}
+      ],
+      touTiaoListInfo: {
+        height: 0,
+        translateY: 0,
+        currentIndex: 0,
+        duration: '200ms',
+        scrollTime: 1600,
+        scrollId: ''
+      },
       heightScale: 1.033,
-      styleScale: {columnHeightScale: 1.033}
+      styleScale: {columnHeightScale: 1.033, tuTiaoHeightScale: 9.375}
     }
   },
   methods: {
     columnListHeight: function () {
       return (window.innerWidth / this.styleScale.columnHeightScale) + 'px';
+    },
+
+    touTiaoHeight: function () {
+      this.touTiaoListInfo.height = window.innerWidth / this.styleScale.tuTiaoHeightScale;
+      return this.touTiaoListInfo.height + 'px';
+    },
+
+    touTiaoAddEvent: function () {
+      //TODO 考虑滚动到，才开始动画(不过淘宝本来也没这样做）
+      let
+          self = this,
+          info = self.touTiaoListInfo,
+          touTiaoListE = document.getElementById('touTiaoList');
+      touTiaoListE.addEventListener('transitionend', function () {
+        let cIndex = info.currentIndex;
+        switch (cIndex) {
+          case self.touTiaoList.length:
+            clearInterval(info.scrollId);
+            info.currentIndex = -1;
+            info.translateY = info.height;
+            info.duration = '1ms';
+            break;
+          case -1 :
+            info.currentIndex = 0;
+            info.translateY = 0;
+            info.duration = '40ms';
+            break;
+          case 0 :
+            self.initTouTiaoScroll();
+        }
+      });
+    },
+
+    initTouTiaoScroll: function () {
+      this.touTiaoListInfo.scrollId = setInterval(this.setTouTiaoScroll, this.touTiaoListInfo.scrollTime);
+    },
+
+    setTouTiaoScroll: function () {
+      let
+          info = this.touTiaoListInfo,
+          cIndex = info.currentIndex;
+      info.duration = '200ms';
+      info.currentIndex = cIndex + 1;
+      info.translateY += -info.height;
     }
+  },
+  mounted() {
+    this.touTiaoAddEvent();
+    this.initTouTiaoScroll();
   }
 }
 </script>
@@ -141,20 +183,22 @@ export default {
 <style lang="scss" scoped>
 @import "../../style/mixin";
 
+$borderRadius: 12px;
+$bgColor: #fff;
+
 .columnList {
   @include wh(calc(100% - 20px), 200px);
-  margin: 10px;
+  margin: 10px 10px 2px 10px;
   display: flex;
   justify-content: space-between;
-  //background: #fff;
 
   > div {
     @include wh(calc(50% - 1px), 100%);
-    background: #fff;
+    background: $bgColor;
   }
 
   .columnListLeft {
-    border-top-left-radius: 12px;
+    border-top-left-radius: $borderRadius;
 
     > div {
       @include wh(100%, 32.8%);
@@ -410,6 +454,58 @@ export default {
     > div {
       @include wh(100%, 32.8%);
       display: flex;
+    }
+  }
+}
+
+.touTiao {
+  @include wh(calc(100% - 20px), 40px);
+  margin: 0 auto 300px auto;
+  background: $bgColor;
+  display: flex;
+  overflow: hidden;
+
+  .touTiaoLogo {
+    @include wh(24%, 100%);
+    border-bottom-left-radius: $borderRadius;
+
+    > div {
+      @include wh(75%, 100%);
+      margin: 0 auto;
+      @include bg("../../image/tbtoutiao.png");
+      background: {
+        size: contain;
+        position: center;
+      };
+    }
+  }
+
+  .touTiaoList {
+    @include wh(76%, 100%);
+    border-bottom-right-radius: $borderRadius;
+    //background: #666666;
+
+    .touTiaoItem {
+      @include wh(87%, 100%);
+      display: flex;
+      align-items: center;
+      font-size: 0.8125rem;
+
+      .touTiaoItemTag {
+        justify-content: center;
+        background-color: #feefec;
+        color: #e86217;
+        padding: 2px 6px;
+        border-radius: 4px;
+      }
+
+      .touTiaoItemTitle {
+        width: 77%;
+        padding: 2px 5px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
     }
   }
 }
