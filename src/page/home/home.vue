@@ -30,4 +30,5 @@ export default {
 <style lang="scss" scoped>
 @import "../../style/mixin";
 
+
 </style>
